@@ -1,30 +1,3 @@
-# import flet as ft
-
-
-# def main(page: ft.Page):
-#     page.title = "Hi Guys"
-
-#     def change_name(e):
-#         print(name_input.value)
-    
-#     name_input = ft.TextField(label="Enter word", on_change=change_name)
-#     page.add(name_input)
-
-#     def find_name(e):
-
-#         friends = ["Tima", "Beka", "Adi"]
-
-#         for name in friends:
-#             if name == name_input.value.title():
-#                 print(f'Name: {name}')  
-#                 return
-            
-
-#     qwerty = find_name(change_name)
-              
-#     print(qwerty)
-
-# ft.app(main)
 import flet as ft
 
 def main(page: ft.Page):
@@ -32,15 +5,18 @@ def main(page: ft.Page):
 
     friends = ["Tima", "Beka", "Adi"]
 
-    def find_name(e):
-        input_value = name_input.value.title()
-        for name in friends:
-            if name == input_value:
-                print(f'drug: {name}')
-                return
-        print("Ne drug")
+    result_text = ft.Text()
 
-    name_input = ft.TextField(label="Enter word", on_change=find_name)
-    page.add(name_input)
+    def find_name(e):
+        input_value = name_input.value.strip().title()
+        if input_value in friends:
+            result_text.value = f"✅ Drug: {input_value}"
+        else:
+            result_text.value = "❌ Ne drug."
+        page.update()
+
+    name_input = ft.TextField(label="Enter name", on_change=find_name)
+    
+    page.add(name_input, result_text)
 
 ft.app(main)
