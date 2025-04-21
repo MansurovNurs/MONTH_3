@@ -41,7 +41,7 @@ def main(page: ft.Page):
         total_expences_text.value = f'total expences: {page.total_expences}'
     
 
-        list.controls.append(
+        name_list.controls.append(
             ft.Row(
                 controls=[
                     ft.Text(value=f'name: {name_input.value} |', size=20, color=ft.colors.BLACK, bgcolor=ft.Colors.DEEP_ORANGE_50),
@@ -61,7 +61,7 @@ def main(page: ft.Page):
     expences_input = ft.TextField(label='Enter expences: ')
     # icons = ft.icons.ACCESS_TIME
     
-    list = ft.Column(
+    name_list = ft.Column(
         expand=True, scroll="alweys"
     )
 
@@ -72,7 +72,7 @@ def main(page: ft.Page):
 
     
 
-    page.add(title, row_area, total_expences_text, list)
+    page.add(title, row_area, total_expences_text, name_list)
 
 
 ft.app(main)
