@@ -4,10 +4,11 @@ def main(page: ft.Page):
     page.title = "Hi Guys"
 
     page.total_expences = 0
-    # page.counter = 0
+    page.counter = 0
     title = ft.Text(value="Info", size=30, weight=ft.FontWeight.BOLD)
 
     total_expences_text = ft.Text(value='total expences: 0', size=20, weight=ft.FontWeight.BOLD)
+    average_expences_text = ft.Text(value='average expences: 0', size=20, weight=ft.FontWeight.BOLD)
     def click_button(e):
         
         expences_text = expences_input.value.strip()
@@ -37,15 +38,17 @@ def main(page: ft.Page):
 
 
         page.total_expences += expences
+        page.counter += 1
 
         total_expences_text.value = f'total expences: {page.total_expences}'
+        average_expences_text.value = f'average expences: {round(page.total_expences / page.counter, 2)} com'
     
 
         name_list.controls.append(
             ft.Row(
                 controls=[
-                    ft.Text(value=f'name: {name_input.value} |', size=20, color=ft.colors.BLACK, bgcolor=ft.Colors.DEEP_ORANGE_50),
-                    ft.Text(value=f'expences: {expences_input.value} |', size=20, color=expences_color, bgcolor=ft.Colors.DEEP_ORANGE_50),
+                    ft.Text(value=f'name: {name_input.value} ', size=20, color=ft.colors.BLACK, bgcolor=ft.Colors.DEEP_ORANGE_50),
+                    ft.Text(value=f'expences: {expences_input.value} com', size=20, color=expences_color, bgcolor=ft.Colors.DEEP_ORANGE_50),
                     ft.IconButton(icon=ft.icons.EDIT, icon_size=20, icon_color=ft.colors.BROWN),
                     ft.IconButton(icon=ft.icons.DELETE_OUTLINE, icon_size=20, icon_color=ft.colors.RED)
                 ] 
@@ -53,13 +56,15 @@ def main(page: ft.Page):
         )
         name_input.value = ""
         expences_input.value = ""
+        name_input.focus()
+
         
 
         page.update()
 
     name_input = ft.TextField(label="Enter name: ")
     expences_input = ft.TextField(label='Enter expences: ')
-    # icons = ft.icons.ACCESS_TIME
+
     
     name_list = ft.Column(
         expand=True, scroll="alweys"
@@ -72,7 +77,7 @@ def main(page: ft.Page):
 
     
 
-    page.add(title, row_area, total_expences_text, name_list)
+    page.add(title, row_area, name_list, total_expences_text, average_expences_text)
 
 
 ft.app(main)
